@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>New match</h2>
+
+<form action="/matches" method="post">
+    <table class="match-layout">
+        <thead>
+            <tr>
+                <th>
+                    <label class="match-input-label" for="home_team_id">Home Team</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-result-input-label" for="match_result">Result</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-away-team-input-label" for="away_team_id">Away
+                        Team</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-date-input-label" for="match_date">match Date</label>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="match-hover">
+                <td></td>
+            </tr>
+            <tr class="match-hover">
+                <td>
+                    <select class="input-maintenance" name="home_team_id" id="home_team_id">
+                        <option value="" selected disabled hidden>Select Team</option>
+                        {% for team in teams %}
+                        {{team.team_name}}
+                        <option value="{{team.id}}">{{team.team_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <input class="input-maintenance" type="text" id="match_result" name="match_result"
+                        placeholder=" - ">
+                </td>
+
+                <td>
+                    <select class="input-maintenance" name="away_team_id" id="away_team_id">
+                        <option value="" selected disabled hidden>Select Team</option>
+                        {% for team in teams %}
+                        {{team.team_name}}
+                        <option value="{{team.id}}">{{team.team_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <input class="input-maintenance" type="date" id="match_date" name="match_date"
+                        placeholder="match_date" required>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input class="btn" type="submit" value="Add match">
+    <a class="btn" href="/matches">Cancel</a>
+
+</form>
+{% endblock %}

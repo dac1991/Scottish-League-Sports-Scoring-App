@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Administrator Settings: match Maintenance - Update match</h2>
+
+<form action="/matches/{{match.id}}" method="post">
+    <table class="match-layout">
+        <thead>
+            <tr>
+                <th>
+                    <label class="match-input-label" for="home_team_id">Home Team</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-result-input-label" for="match_result">Result</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-away-team-input-label" for="away_team_id">Away
+                        Team</label>
+                </th>
+                <th>
+                    <label class="match-input-label match-date-input-label" for="match_date">match Date</label>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="match-hover">
+                <td></td>
+            </tr>
+            <tr class="match-hover">
+                <td>
+                    <select class="input-maintenance" name="home_team_id" id="home_team_id">
+                        {% for team in teams %}
+
+                        {% if team.id == match.home_team_id %}
+                        <option value="{{team.id}}" selected>{{team.team_name}}</option>
+                        {% else %}
+                        <option value="{{team.id}}">{{team.team_name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <input class="input-maintenance" type="text" id="match_result" value="{{match.match_result}}"
+                        name="match_result" placeholder=" - ">
+                </td>
+
+                <td>
+                    <select class="input-maintenance" name="away_team_id" id="away_team_id">
+                        {% for team in teams %}
+                        {% if team.id == match.away_team_id %}
+                        <option value="{{team.id}}" selected>{{team.team_name}}</option>
+                        {% else %}
+                        <option value="{{team.id}}">{{team.team_name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <input class="input-maintenance" type="date" id="match_date" name="match_date"
+                        value="{{match.match_date}}" required>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn" type="submit">Confirm Edit</button>
+    <a class="btn" href="/matches">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table-matches">
+    <thead>
+        <tr>
+            <th class="table-col-match-date">Date of match</th>
+            <th>Home</th>
+            <th>vs</th>
+            <th>Away</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matches %}
+        
+        {% if (team_name == teams[match.home_team_id-1].team_name) or (team_name ==
+        teams[match.away_team_id-1].team_name) %}
+        <tr>
+            <td class="table-col-match-date">{{match.match_date.strftime("%d-%b-%y")}}</td>
+            <td>{{teams[match.home_team_id-1].team_name}}</td>
+
+            {% if match.match_result %}
+            <td>{{match.match_result}}</td>
+            {% else %}
+            <td>vs</td>
+            {% endif %}
+
+            <td>{{teams[match.away_team_id-1].team_name}}</td>
+
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
